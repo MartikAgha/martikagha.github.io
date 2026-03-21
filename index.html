@@ -79,12 +79,7 @@
 
     .nav-brand span { color: var(--text-muted); }
 
-    /* dropdown wrapper */
-    .nav-item {
-      position: relative;
-    }
-
-    .nav-item > button {
+    .nav-btn {
       background: none;
       border: 1px solid transparent;
       color: var(--text);
@@ -97,67 +92,9 @@
       transition: border-color 0.2s, color 0.2s;
     }
 
-    .nav-item > button::after {
-      content: ' ▾';
-      color: var(--arrow-green);
-      font-size: 0.7rem;
-    }
-
-    .nav-item:hover > button,
-    .nav-item:focus-within > button {
+    .nav-btn:hover {
       border-color: var(--accent);
       color: var(--accent);
-    }
-
-    /* dropdown panel */
-    .dropdown {
-      display: none;
-      position: absolute;
-      top: calc(100% + 8px);
-      right: 0;
-      min-width: 200px;
-      background: var(--bg-panel);
-      border: 1px solid var(--border);
-      border-radius: 4px;
-      overflow: hidden;
-      box-shadow: 0 8px 32px rgba(0,0,0,0.6);
-    }
-
-    .nav-item:hover .dropdown,
-    .nav-item:focus-within .dropdown { display: block; }
-
-    .dropdown a,
-    .dropdown button.dd-link {
-      display: block;
-      padding: 0.6rem 1.2rem;
-      font-family: var(--font);
-      font-size: 0.82rem;
-      color: var(--text-muted);
-      background: none;
-      border: none;
-      width: 100%;
-      text-align: left;
-      cursor: pointer;
-      border-left: 2px solid transparent;
-      transition: color 0.15s, border-color 0.15s, background 0.15s;
-    }
-
-    .dropdown a:hover,
-    .dropdown button.dd-link:hover {
-      color: var(--accent);
-      border-left-color: var(--accent);
-      background: var(--accent-glow);
-      text-decoration: none;
-    }
-
-    .dropdown .dd-label {
-      font-size: 0.7rem;
-      color: var(--accent);
-      padding: 0.6rem 1.2rem 0.2rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      border-bottom: 1px solid var(--border);
-      margin-bottom: 0.2rem;
     }
 
     /* ─── HERO SECTION ──────────────────────────────────────────────────── */
@@ -334,6 +271,18 @@
       opacity: 1;
       transform: translateY(0) scale(1);
       pointer-events: auto;
+    }
+
+    .project-card.peek-above {
+      opacity: 0.15;
+      transform: translateY(-120px) scale(0.92);
+      pointer-events: none;
+    }
+
+    .project-card.peek-below {
+      opacity: 0.15;
+      transform: translateY(120px) scale(0.92);
+      pointer-events: none;
     }
 
     .project-card.exiting {
@@ -522,53 +471,21 @@
 <nav>
   <div class="nav-brand">~/portfolio<span>_</span><span class="cursor"></span></div>
 
-  <!-- Home tab -->
-  <div class="nav-item">
-    <button>Home</button>
-    <div class="dropdown">
-      <div class="dd-label">Navigate</div>
-      <button class="dd-link" onclick="scrollTo('#home')">↳ Intro</button>
-      <button class="dd-link" onclick="scrollTo('#about')">↳ About</button>
-    </div>
-  </div>
-
-  <!-- Projects tab -->
-  <div class="nav-item">
-    <button>Projects</button>
-    <div class="dropdown" id="projects-dropdown">
-      <div class="dd-label">Work</div>
-      <!-- populated by JS from projectData -->
-    </div>
-  </div>
-
-  <!-- Favourite Links tab -->
-  <div class="nav-item">
-    <button>Favourite Links</button>
-    <div class="dropdown">
-      <div class="dd-label">Resources</div>
-      <a href="https://arxiv.org/list/cs.LG/recent" target="_blank">arXiv · ML papers</a>
-      <a href="https://distill.pub" target="_blank">Distill.pub</a>
-      <a href="https://paperswithcode.com" target="_blank">Papers With Code</a>
-      <a href="https://huggingface.co" target="_blank">Hugging Face</a>
-      <a href="https://kaggle.com" target="_blank">Kaggle</a>
-      <a href="https://course.fast.ai" target="_blank">fast.ai</a>
-      <div class="dd-label" style="margin-top:.4rem">Tools</div>
-      <a href="https://colab.research.google.com" target="_blank">Google Colab</a>
-      <a href="https://wandb.ai" target="_blank">Weights & Biases</a>
-      <a href="https://github.com" target="_blank">GitHub</a>
-    </div>
-  </div>
+  <button class="nav-btn" onclick="scrollTo('#home')">Home</button>
+  <button class="nav-btn" onclick="scrollTo('#projects')">Projects</button>
+  <button class="nav-btn" onclick="scrollTo('#links')">Favourite Links</button>
 </nav>
 
 <!-- ═══ HERO ══════════════════════════════════════════════════════════════ -->
 <section id="home">
   <p class="hero-eyebrow">// data science &amp; ai portfolio</p>
-  <h1 class="hero-name">Your<br /><em>Name</em></h1>
-  <p class="hero-title">Data Scientist &amp; AI Engineer</p>
+  <h1 class="hero-name">Dr Martik<br /><em>Aghajanian</em></h1>
+  <p class="hero-title">Experienced Data Scientist, Manager &amp; AI/ML Engineer</p>
   <p class="hero-bio">
-    Building things at the intersection of statistics, machine learning, and
-    real-world impact. Interested in interpretability, time-series forecasting,
-    and large-scale data pipelines.
+    Engineering &amp; delivering production-level projects that model, predict, and generate.
+    My favourite weapons are <code style="color:var(--text);background:rgba(255,255,255,0.08);padding:0.1rem 0.4rem;border-radius:3px;">catboost</code>,
+    <code style="color:var(--text);background:rgba(255,255,255,0.08);padding:0.1rem 0.4rem;border-radius:3px;">optuna</code> and the
+    <code style="color:var(--text);background:rgba(255,255,255,0.08);padding:0.1rem 0.4rem;border-radius:3px;">Mann-Whitney U test</code>.
   </p>
   <a class="btn-primary" href="#" onclick="scrollTo('#projects');return false;">
     View Projects
@@ -611,7 +528,7 @@
 
 <!-- ═══ FOOTER ════════════════════════════════════════════════════════════ -->
 <footer>
-  <span>© 2026 Your Name — built with plain HTML</span>
+  <span>© 2026 Dr Martik Aghajanian — built with plain HTML</span>
   <div class="footer-socials">
     <a href="https://github.com" target="_blank">GitHub</a>
     <a href="https://linkedin.com" target="_blank">LinkedIn</a>
@@ -626,24 +543,24 @@
    ──────────────────────────────────────────────────────────────────────*/
 const projectData = [
   {
-    tag:   'Machine Learning',
-    title: 'Project One',
-    desc:  'Describe what the project does, the problem it solves, and any interesting results or scale. Two or three sentences is plenty.',
-    stack: ['Python', 'PyTorch', 'scikit-learn', 'Pandas'],
+    tag:   'Recommender Systems',
+    title: 'Hybrid Content & Collab Recommender for Clothing',
+    desc:  'A hybrid recommendation engine combining collaborative filtering and content-based approaches to surface relevant clothing items. Blends user behaviour signals with item metadata for personalised recommendations at scale.',
+    stack: ['Python', 'scikit-learn', 'Pandas', 'CatBoost'],
     links: [{ label: 'GitHub →', href: '#' }, { label: 'Write-up →', href: '#' }],
   },
   {
     tag:   'NLP',
-    title: 'Project Two',
-    desc:  'Another project description. Mention the dataset, the approach, and the outcome. What did you learn?',
+    title: 'Wikipedia Summarizer',
+    desc:  'An NLP pipeline that fetches and summarizes Wikipedia articles, distilling long-form content into concise, readable summaries using extractive and abstractive techniques.',
     stack: ['Python', 'Transformers', 'HuggingFace', 'FastAPI'],
     links: [{ label: 'GitHub →', href: '#' }, { label: 'Demo →', href: '#' }],
   },
   {
-    tag:   'Data Engineering',
-    title: 'Project Three',
-    desc:  'Pipeline or infrastructure project. Who used it, how much data, what impact did it have?',
-    stack: ['dbt', 'Airflow', 'BigQuery', 'Looker'],
+    tag:   'Computer Vision',
+    title: 'Visual Recommender (CNNs & Autoencoders)',
+    desc:  'A visual similarity recommender that uses convolutional neural networks and autoencoders to learn latent representations of images, enabling "find similar items" functionality from raw pixels.',
+    stack: ['Python', 'PyTorch', 'OpenCV', 'scikit-learn'],
     links: [{ label: 'GitHub →', href: '#' }],
   },
   {
@@ -652,6 +569,13 @@ const projectData = [
     desc:  'Visual ML project. What were you detecting or classifying? What architecture, what accuracy?',
     stack: ['PyTorch', 'OpenCV', 'YOLO', 'ONNX'],
     links: [{ label: 'GitHub →', href: '#' }, { label: 'Paper →', href: '#' }],
+  },
+  {
+    tag:   'Data Science',
+    title: 'Project Five',
+    desc:  'Placeholder for your next project. Describe the problem, approach, and results.',
+    stack: ['Python', 'Pandas', 'Optuna', 'CatBoost'],
+    links: [{ label: 'GitHub →', href: '#' }],
   },
 ];
 
@@ -679,8 +603,6 @@ function scrollTo(hash) {
   const track    = document.getElementById('projects-track');
   const dotsWrap = document.getElementById('project-dots');
   const progress = document.getElementById('projects-progress');
-  const dropdown = document.getElementById('projects-dropdown');
-
   const PER_CARD_PX = window.innerHeight; // scroll distance per project
   track.style.height = (projectData.length * PER_CARD_PX + window.innerHeight) + 'px';
 
@@ -707,16 +629,6 @@ function scrollTo(hash) {
     });
     dotsWrap.appendChild(dot);
 
-    // dropdown entry
-    const ddBtn = document.createElement('button');
-    ddBtn.className = 'dd-link';
-    ddBtn.textContent = `↳ ${p.title}`;
-    ddBtn.addEventListener('click', () => {
-      const targetY = stage.offsetTop + i * PER_CARD_PX + 10;
-      window.scrollTo({ top: targetY, behavior: 'smooth' });
-    });
-    dropdown.appendChild(ddBtn);
-
     return card;
   });
 
@@ -730,7 +642,7 @@ function scrollTo(hash) {
 
     if (scrolled < 0 || scrolled > totalTrack + window.innerHeight) {
       // outside range — hide all
-      cards.forEach(c => { c.classList.remove('visible', 'exiting'); });
+      cards.forEach(c => { c.classList.remove('visible', 'exiting', 'peek-above', 'peek-below'); });
       dots.forEach(d => d.classList.remove('active'));
       progress.style.width = '0%';
       activeIndex = -1;
@@ -744,20 +656,26 @@ function scrollTo(hash) {
 
     if (newIndex === activeIndex) return;
 
-    // transition out old
-    if (activeIndex >= 0 && activeIndex < cards.length) {
-      const old = cards[activeIndex];
-      old.classList.remove('visible');
-      old.classList.add('exiting');
-      dots[activeIndex].classList.remove('active');
-      setTimeout(() => old.classList.remove('exiting'), 500);
-    }
+    // clear all states
+    cards.forEach(c => { c.classList.remove('visible', 'exiting', 'peek-above', 'peek-below'); });
+    dots.forEach(d => d.classList.remove('active'));
 
-    // transition in new
     activeIndex = newIndex;
+
+    // show active card
     if (activeIndex >= 0 && activeIndex < cards.length) {
       cards[activeIndex].classList.add('visible');
       dots[activeIndex].classList.add('active');
+    }
+
+    // show faded peek of card above
+    if (activeIndex > 0) {
+      cards[activeIndex - 1].classList.add('peek-above');
+    }
+
+    // show faded peek of card below
+    if (activeIndex < cards.length - 1) {
+      cards[activeIndex + 1].classList.add('peek-below');
     }
   }
 
