@@ -7,16 +7,16 @@
   <style>
     /* ─── DESIGN TOKENS ─────────────────────────────────────────────────── */
     :root {
-      --bg:           #002b36;       /* solarized base03 */
-      --bg-panel:     #073642;       /* solarized base02 */
-      --bg-card:      #073642;
-      --border:       #586e75;       /* solarized base01 */
-      --accent:       #268bd2;       /* solarized blue */
-      --accent-dim:   #2176b8;
-      --accent-glow:  rgba(38, 139, 210, 0.15);
-      --arrow-green:  #859900;       /* solarized green */
-      --text:         #93a1a1;       /* solarized base1 */
-      --text-muted:   #657b83;       /* solarized base00 */
+      --bg:           #103c48;       /* selenized bg_0 */
+      --bg-panel:     #184956;       /* selenized bg_1 */
+      --bg-card:      #184956;       /* selenized bg_1 */
+      --border:       #2d5b69;       /* selenized bg_2 */
+      --accent:       #4695f7;       /* selenized blue */
+      --accent-dim:   #2f7de0;
+      --accent-glow:  rgba(70, 149, 247, 0.15);
+      --arrow-green:  #75b938;       /* selenized green */
+      --text:         #cad8d9;       /* selenized fg_1 */
+      --text-muted:   #72898f;       /* selenized dim_0 */
       --font:         'Courier New', Courier, monospace;
       --nav-h:        56px;
     }
@@ -59,7 +59,7 @@
       position: fixed;
       top: 0; left: 0; right: 0;
       height: var(--nav-h);
-      background: rgba(0,43,54,0.92);
+      background: rgba(16,60,72,0.95);
       backdrop-filter: blur(12px);
       border-bottom: 1px solid var(--border);
       display: flex;
@@ -116,8 +116,8 @@
       inset: 0;
       pointer-events: none;
       background-image:
-        linear-gradient(rgba(38,139,210,0.06) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(38,139,210,0.06) 1px, transparent 1px);
+        linear-gradient(rgba(70,149,247,0.06) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(70,149,247,0.06) 1px, transparent 1px);
       background-size: 60px 60px;
       mask-image: radial-gradient(ellipse 80% 60% at 50% 50%, black 30%, transparent 100%);
     }
@@ -262,6 +262,7 @@
       transform: translateY(40px) scale(0.97);
       transition: opacity 0.5s ease, transform 0.5s ease;
       pointer-events: none;
+      z-index: 1;
       box-shadow:
         0 0 0 1px var(--border),
         0 20px 60px rgba(0,0,0,0.5);
@@ -271,25 +272,30 @@
       opacity: 1;
       transform: translateY(0) scale(1);
       pointer-events: auto;
+      z-index: 3;
+      background: var(--bg-card);  /* guaranteed solid, no bleed-through */
     }
 
     .project-card.peek-above {
-      opacity: 0.35;
-      transform: translateY(-160px) scale(0.88) perspective(800px) rotateX(12deg);
+      opacity: 0.45;
+      transform: translateY(-175px) scale(0.88) perspective(800px) rotateX(14deg);
       transform-origin: center bottom;
       pointer-events: none;
+      z-index: 2;
     }
 
     .project-card.peek-below {
-      opacity: 0.35;
-      transform: translateY(160px) scale(0.88) perspective(800px) rotateX(-12deg);
+      opacity: 0.45;
+      transform: translateY(175px) scale(0.88) perspective(800px) rotateX(-14deg);
       transform-origin: center top;
       pointer-events: none;
+      z-index: 2;
     }
 
     .project-card.exiting {
       opacity: 0;
       transform: translateY(-40px) scale(0.97);
+      z-index: 1;
     }
 
     .card-tag {
@@ -325,7 +331,7 @@
 
     .card-stack span {
       font-size: 0.72rem;
-      background: rgba(38,139,210,0.08);
+      background: rgba(70,149,247,0.08);
       border: 1px solid var(--border);
       border-radius: 2px;
       padding: 0.15rem 0.55rem;
@@ -473,9 +479,9 @@
 <nav>
   <div class="nav-brand">~/portfolio<span>_</span><span class="cursor"></span></div>
 
-  <button class="nav-btn" onclick="scrollTo('#home')">Home</button>
-  <button class="nav-btn" onclick="scrollTo('#projects')">Projects</button>
-  <button class="nav-btn" onclick="scrollTo('#links')">Favourite Links</button>
+  <button class="nav-btn" onclick="scrollToSection('#home')">Home</button>
+  <button class="nav-btn" onclick="scrollToSection('#projects')">Projects</button>
+  <button class="nav-btn" onclick="scrollToSection('#links')">Favourite Links</button>
 </nav>
 
 <!-- ═══ HERO ══════════════════════════════════════════════════════════════ -->
@@ -485,11 +491,11 @@
   <p class="hero-title">Experienced Data Scientist, Manager &amp; AI/ML Engineer</p>
   <p class="hero-bio">
     Engineering &amp; delivering production-level projects that model, predict, and generate.
-    My favourite weapons are <code style="color:var(--text);background:rgba(38,139,210,0.12);padding:0.1rem 0.4rem;border-radius:3px;">catboost</code>,
-    <code style="color:var(--text);background:rgba(38,139,210,0.12);padding:0.1rem 0.4rem;border-radius:3px;">optuna</code> and the
+    My favourite weapons are <code style="color:var(--text);background:rgba(70,149,247,0.12);padding:0.1rem 0.4rem;border-radius:3px;">catboost</code>,
+    <code style="color:var(--text);background:rgba(70,149,247,0.12);padding:0.1rem 0.4rem;border-radius:3px;">optuna</code> and the
     Mann-Whitney U test.
   </p>
-  <a class="btn-primary" href="#" onclick="scrollTo('#projects');return false;">
+  <a class="btn-primary" href="#" onclick="scrollToSection('#projects');return false;">
     View Projects
   </a>
 </section>
@@ -594,7 +600,7 @@ const linksData = [
 ];
 
 /* ─── HELPERS ─────────────────────────────────────────────────────────── */
-function scrollTo(hash) {
+function scrollToSection(hash) {
   const el = document.querySelector(hash);
   if (el) el.scrollIntoView({ behavior: 'smooth' });
 }
